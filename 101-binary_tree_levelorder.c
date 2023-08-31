@@ -70,28 +70,6 @@ void queue_delete(queue_t *queue)
 }
 
 /**
- * queue_size - Finds the size of the queue
- * @queue: The queue
- *
- * Return: the size of the queue
- */
-size_t queue_size(queue_t *queue)
-{
-	size_t size = 0;
-	queue_node_t *temp;
-
-	if (queue == NULL)
-		return (0);
-	temp = queue->front;
-	while (temp)
-	{
-		size++;
-		temp = temp->next;
-	}
-	return (size);
-}
-
-/**
  * binary_tree_levelorder - Traverse a tree using level order
  * @tree: The pointer to the root node of the tree
  * @func: The function to call for each node
@@ -99,7 +77,8 @@ size_t queue_size(queue_t *queue)
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
 	const binary_tree_t *temp;
-	size_t h, i;
+	size_t h = 0, i;
+	queue_node_t *temp;
 	queue_t *queue;
 
 	if (tree == NULL || func == NULL)
@@ -108,7 +87,17 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 	enqueue(queue, tree);
 	while (queue->front)
 	{
-		h = queue_size(queue);
+		if (queue == NULL)
+			h = 0;
+		else
+		{
+			temp = queue->front;
+			while (temp)
+			{
+				h++;
+				temp = temp->next;
+			}
+		}
 		for (i = 0; i < h; i++)
 		{
 			temp = dequeue(queue);
