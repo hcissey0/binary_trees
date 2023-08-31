@@ -106,7 +106,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 			if (temp->left)
 				enqueue(queue, temp->left);
 			if (temp->left)
-				enqueue(queue,temp->right);
+				enqueue(queue, temp->right);
 		}
 	}
 	queue_delete(queue);
