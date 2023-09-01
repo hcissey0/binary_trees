@@ -1,11 +1,29 @@
 #include "binary_trees.h"
 
 /**
- * is_avl - Checks if a tree is avl
+ * tree_height - Measures the height of a tree
  * @tree: the tree
+ *
+ * Return: the height of @tree
+ */
+size_t tree_height(const binary_tree_t *tree)
+{
+	size_t left = 0, right = 0;
+
+	if (tree == NULL)
+		return (0);
+	left = tree_height(tree->left);
+	right = tree_height(tree->right);
+
+	return (1 + (left > right ? left : right));
+}
+
+/**
+ * is_avl - Checks if a tree is avl
+ * @tree: the tree to check
  * @height: the height of the tree
  *
- * Return: 0 if not avl otherwise 1
+ * Return: 1 if avl 0 otherwise
  */
 int is_avl(const binary_tree_t *tree, int *height)
 {
@@ -19,7 +37,7 @@ int is_avl(const binary_tree_t *tree, int *height)
 	}
 	left_avl = is_avl(tree->left, &left);
 	right_avl = is_avl(tree->right, &right);
-	*height = left > right ? left + 1 : right + 1;
+	*height = (1 + (left > right ? left : right));
 	if (abs(left - right) > 1)
 		return (0);
 	return (left_avl && right_avl);
@@ -28,8 +46,8 @@ int is_avl(const binary_tree_t *tree, int *height)
 /**
  * is_bst - Checks if a tree is bst
  * @tree: the tree to be checked
- * @min: the min
- * @max: the max
+ * @min: the int min
+ * @max: the int max
  *
  * Return: 1 if bst, 0 otherwise
  */
@@ -37,10 +55,10 @@ int is_bst(const binary_tree_t *tree, int min, int max)
 {
 	if (tree == NULL)
 		return (1);
-	if (tree->n < min || tree->n > max)
+	if (tree->n <= min || tree->n >= max)
 		return (0);
-	return (is_bst(tree->left, min, tree->n - 1) &&
-			is_bst(tree->right, tree->n + 1, max));
+	return (is_bst(tree->left, min, tree->n) &&
+			is_bst(tree->right, tree->n, max));
 }
 
 /**
