@@ -83,14 +83,11 @@ size_t queue_size(queue_t *queue)
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	queue_t *queue;
+	queue_t *queue = malloc(sizeof(queue_t));
 	const binary_tree_t *temp;
 	int f = 0;
 
-	if (tree == NULL)
-		return (0);
-	queue = malloc(sizeof(queue_t));
-	if (queue == NULL)
+	if (tree == NULL || queue == NULL)
 		return (0);
 	queue->front = NULL;
 	queue->rear = NULL;
