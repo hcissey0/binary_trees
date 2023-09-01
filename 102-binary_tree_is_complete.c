@@ -87,7 +87,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	const binary_tree_t *temp;
 	int f = 0;
 
-	if (tree == NULL || queue == NULL)
+	if (tree == NULL)
 		return (0);
 	queue->front = NULL;
 	queue->rear = NULL;
