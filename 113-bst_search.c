@@ -3,7 +3,7 @@
 /**
  * bst_search - Searches for a value in a binary search tree
  * @tree: The tree to search from
- * value: the value to search for
+ * @value: the value to search for
  *
  * Return: a pointer to the node of the value
  */
