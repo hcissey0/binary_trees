@@ -52,9 +52,8 @@ avl_t *avl_insert(avl_t **tree, int value)
 			parent->right = binary_tree_rotate_right(parent->right);
 			parent = binary_tree_rotate_left(parent);
 		}
-		if (parent->parent == NULL)
-			*tree = parent;
-		parent = parent->parent;
+		else
+			parent = parent->parent;
 	}
 	return (tmp);
 }
